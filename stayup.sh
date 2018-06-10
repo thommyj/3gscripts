@@ -30,11 +30,11 @@ do
 			while [ -z "$ADDR" ]
 			do
 				##take down interface and reconnect
-				ifdown wwan0
+				ifdown wwan0 || continue
 				echo -e "AT^NDISDUP=1,0,\"bredband.tre.se\"\r" >&3 || continue
 				sleep 1
 				echo -e "AT^NDISDUP=1,1,\"bredband.tre.se\"\r" >&3 || continue
-				ifup wwan0
+				ifup wwan0 || continue
 				ADDR=`ifconfig wwan0 | grep "inet addr"`
 				logger -t $LOGTAG -s "received addr=$ADDR"
 				sleep 2
