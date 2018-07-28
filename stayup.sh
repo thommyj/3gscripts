@@ -52,7 +52,8 @@ do
 		SERIALTTY=`dmesg | grep -E "GSM modem.*attached" | tail -n 1 | sed -e 's/^.* attached to //g'`
 		SERIALTTY="/dev/${SERIALTTY}"
 		[ ! -z "$SERIALTTY" -a -c $SERIALTTY ] && exec 3<> $SERIALTTY && continue
-		logger -t $LOGTAG -s "no 3g dongle found!"
+		SERIALTTY=
+                logger -t $LOGTAG -s "no 3g dongle found!"
 		sleep 15
 	fi
 done
