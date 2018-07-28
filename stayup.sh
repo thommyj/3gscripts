@@ -15,7 +15,7 @@ fail=0
 
 while :
 do
-	if [ ! -z "$SERIALTTY" -a -c $SERIALTTY ]
+	if [ ! -z "$SERIALTTY" -a -c $SERIALTTY -a true >&3 ]
 	then
 		loop=$((loop + 1))
 		ADDR=`ifconfig wwan0 | grep "inet addr"`
